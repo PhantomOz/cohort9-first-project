@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import "./App.css";
 import { useState } from "react";
 import AddItem from "./AddItem";
+import ListItem from "./ListItem";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -94,37 +95,14 @@ function App() {
         <ul>
           {!!todos.length &&
             todos.map((todo) => (
-              <li className="todo" key={todo.id}>
-                <input
-                  type="checkbox"
-                  checked={todo.completed}
-                  onChange={() => handleCheck(todo.id)}
-                />
-                {editId === todo.id ? (
-                  <input type="text" value={todo.title} onChange={handleEdit} />
-                ) : (
-                  <span className={`todo-title ${todo.completed && "checked"}`}>
-                    {todo.title}
-                  </span>
-                )}
-                {editId === todo.id ? (
-                  <button onClick={() => setEditId(null)}>✅</button>
-                ) : (
-                  <button
-                    className="del-button"
-                    onClick={() => setEditId(todo.id)}
-                    disabled={todo.completed}
-                  >
-                    ✏️
-                  </button>
-                )}
-                <button
-                  className="del-button"
-                  onClick={() => handleDelete(todo.id)}
-                >
-                  🗑️
-                </button>
-              </li>
+              <ListItem
+                todo={todo}
+                editId={editId}
+                handleCheck={handleCheck}
+                handleDelete={handleDelete}
+                handleEdit={handleEdit}
+                setEditId={setEditId}
+              />
             ))}
         </ul>
       </div>
