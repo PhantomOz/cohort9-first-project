@@ -14,6 +14,7 @@ function ListItem({
         type="checkbox"
         checked={todo.completed}
         onChange={() => handleCheck(todo.id)}
+        disabled={editId === todo.id}
       />
       {editId === todo.id ? (
         <input type="text" value={todo.title} onChange={handleEdit} />

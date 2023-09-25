@@ -1,28 +1,13 @@
-import { useEffect } from "react";
+import { useContext } from "react";
 import "./App.css";
-import { useState } from "react";
-import AddItem from "./AddItem";
 import ListItem from "./ListItem";
+import { MyContext } from "./MyContext";
+import Header from "./components/Header";
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  const [editId, setEditId] = useState(null);
-
-  useEffect(() => {
-    let canceled = false;
-    fetch("https://jsonplaceholder.typicode.com/todos")
-      .then((res) => res.json())
-      .then((data) => {
-        if (!canceled) {
-          setTodos(data.slice(0, 10));
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-
-    return () => (canceled = true);
-  }, []);
+  const { todos, setTodos, editId, setEditId, filtered } = useContext(
+    MyContext
+  );
 
   const handleCheck = (id) => {
     // const targetTodo = todos.find((todo) => todo.id === id);
@@ -46,9 +31,6 @@ function App() {
   };
 
   const handleDelete = (id) => {
-    // const newArray = todos.filter((todo) => todo.id !== id);
-    // setTodos(newArray);
-
     const targetTodoIndex = todos.findIndex((todo) => todo.id === id);
 
     const newTodos = [...todos];
@@ -57,44 +39,24 @@ function App() {
   };
 
   const handleEdit = (e) => {
-    // const targetTodo = todos.find((todo) => todo.id === editId);
-
-    // const targetTodoIndex = todos.findIndex((todo) => todo.id === editId);
-
-    // if (!targetTodo || targetTodoIndex === -1) return;
-
-    // targetTodo.title = e.target.value;
-
-    // const newTodos = [...todos];
-
-    // newTodos[targetTodoIndex] = targetTodo;
-
-    // setTodos(newTodos);
-
-    const newTodos = todos.map((todo) =>
-      todo.id === editId ? { ...todo, title: e.target.value } : todo
-    );
-    setTodos(newTodos);
-  };
-
-  const handleAddTodo = (todo) => {
-    const nTodo = {
-      userId: 1,
-      id: todos.length + 1,
-      title: todo,
-      completed: false,
-    };
-    const newTodos = [nTodo, ...todos];
-    setTodos(newTodos);
+    if (e.target.value === "") {
+      const todo = todos.find((todo) => todo.id === editId);
+      e.target.value = todo.title;
+    } else {
+      const newTodos = todos.map((todo) =>
+        todo.id === editId ? { ...todo, title: e.target.value } : todo
+      );
+      setTodos(newTodos);
+    }
   };
 
   return (
     <div className="App">
       <div className="todo-wrapper">
-        <AddItem add={handleAddTodo} />
+        <Header />
         <ul>
-          {!!todos.length &&
-            todos.map((todo) => (
+          {!!filtered.length &&
+            filtered.map((todo) => (
               <ListItem
                 todo={todo}
                 editId={editId}
