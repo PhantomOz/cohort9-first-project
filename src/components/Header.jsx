@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import AddItem from "../AddItem";
+import AddItem from "./AddItem";
 import { MyContext } from "../MyContext";
 
 function Header() {
@@ -24,10 +24,10 @@ function Header() {
 
   useEffect(() => {
     if (tab === "uncompleted") {
-      const uncompleted = todos.filter((todo) => todo.completed === false);
+      const uncompleted = todos?.filter((todo) => todo.completed === false);
       setFiltered(uncompleted);
     } else if (tab === "completed") {
-      const completed = todos.filter((todo) => todo.completed === true);
+      const completed = todos?.filter((todo) => todo.completed === true);
       setFiltered(completed);
     } else {
       setFiltered(todos);

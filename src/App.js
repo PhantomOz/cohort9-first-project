@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import "./App.css";
-import ListItem from "./ListItem";
+import ListItem from "./components/ListItem";
 import { MyContext } from "./MyContext";
 import Header from "./components/Header";
 
@@ -10,20 +10,6 @@ function App() {
   );
 
   const handleCheck = (id) => {
-    // const targetTodo = todos.find((todo) => todo.id === id);
-
-    // const targetTodoIndex = todos.findIndex((todo) => todo.id === id);
-
-    // if (!targetTodo || targetTodoIndex === -1) return;
-
-    // targetTodo.completed = !targetTodo.completed;
-
-    // const newTodos = [...todos];
-
-    // newTodos[targetTodoIndex] = targetTodo;
-
-    // setTodos(newTodos);
-
     const newTodos = todos.map((todo) =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
@@ -55,8 +41,8 @@ function App() {
       <div className="todo-wrapper">
         <Header />
         <ul>
-          {!!filtered.length &&
-            filtered.map((todo) => (
+          {filtered.length > 0 ? (
+            filtered?.map((todo) => (
               <ListItem
                 todo={todo}
                 editId={editId}
@@ -65,7 +51,10 @@ function App() {
                 handleEdit={handleEdit}
                 setEditId={setEditId}
               />
-            ))}
+            ))
+          ) : (
+            <p>No Todo To Display</p>
+          )}
         </ul>
       </div>
     </div>
