@@ -25,7 +25,7 @@ function App() {
   };
 
   const handleEdit = (e) => {
-    if (e.target.value === "") {
+    if (e.target.value === "" || e.target.value === " ") {
       const todo = todos.find((todo) => todo.id === editId);
       e.target.value = todo.title;
     } else {
