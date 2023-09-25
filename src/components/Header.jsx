@@ -66,13 +66,22 @@ function Header() {
           justifyContent: "center",
         }}
       >
-        <button className="tab teal" onClick={handleAll}>
+        <button
+          className={`tab ${tab === "all" && "teal"}`}
+          onClick={handleAll}
+        >
           All
         </button>
-        <button className="tab green" onClick={handleCompleted}>
+        <button
+          className={`tab ${tab === "completed" && "teal"}`}
+          onClick={handleCompleted}
+        >
           Completed
         </button>
-        <button className="tab yellow" onClick={handleUncompleted}>
+        <button
+          className={`tab ${tab === "uncompleted" && "teal"}`}
+          onClick={handleUncompleted}
+        >
           Uncompleted
         </button>
       </div>

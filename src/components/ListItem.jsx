@@ -26,11 +26,7 @@ function ListItem({
       {editId === todo.id ? (
         <button onClick={() => setEditId(null)}>✅</button>
       ) : (
-        <button
-          className="del-button"
-          onClick={() => setEditId(todo.id)}
-          disabled={todo.completed}
-        >
+        <button className="del-button" onClick={() => setEditId(todo.id)}>
           ✏️
         </button>
       )}

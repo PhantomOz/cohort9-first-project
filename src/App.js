@@ -30,7 +30,9 @@ function App() {
       e.target.value = todo.title;
     } else {
       const newTodos = todos.map((todo) =>
-        todo.id === editId ? { ...todo, title: e.target.value } : todo
+        todo.id === editId
+          ? { ...todo, title: e.target.value, completed: false }
+          : todo
       );
       setTodos(newTodos);
     }
@@ -53,7 +55,7 @@ function App() {
               />
             ))
           ) : (
-            <p>No Todo To Display</p>
+            <p className="message">No Todo To Display</p>
           )}
         </ul>
       </div>

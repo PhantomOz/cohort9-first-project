@@ -30,6 +30,11 @@
     margin-top: 8px;
 }
 
+.tab:hover{
+    background-color: #0a6b6b;
+    color: white;
+}
+
 .teal{
     background-color: #0a6b6b;
     color: white;
@@ -41,4 +46,10 @@
 .yellow{
     background-color: #747409;
     color: white;
+}
+.message{
+    font-size: 50px;
+    text-align: center;
+    padding: 100px;
+    color: #085757a2;
 }
